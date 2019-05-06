@@ -1,0 +1,21 @@
+{
+  "short_name": "Cleveland",
+  "name": "Cleveland Map",
+  "icons": [
+    {
+      "src": "/img/map128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/img/map512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "background_color": "#fff",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#fff"
+}

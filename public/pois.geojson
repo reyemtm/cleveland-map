@@ -1,0 +1,121 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "title": "Day 1",
+        "name": "Cuyahoga County Headquarters",
+        "address": "2079 East Ninth Street, Cleveland, Ohio 44115",
+        "info": "venue"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.68544173240662,
+          41.49950185317527
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "name": "Southern Tier Brewery Cleveland",
+        "address": "811 Prospect Ave E, Cleveland, OH 44115",
+        "info": "venue",
+        "website": "https://stbcbeer.com"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.68701350688934,
+          41.499122175398284
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "name": "The Huntington Convention Center of Cleveland",
+        "address": "300 Lakeside Ave East",
+        "title": "Day 2",
+        "info": "venue"
+
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.69452905654907,
+          41.50351143603703
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "900 Tower Garage",
+        "info": "parking"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.684878,
+          41.498664
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Huntington Park Garage",
+        "info": "parking",
+        "address": "1141 West 3rd, Cleveland, OH 44114"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.697517,
+          41.503986
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Willard Park Garage",
+        "info": "parking",
+        "address": "601 Lakeside Ave E, Cleveland, OH 44114"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.694110,
+          41.505694
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mariott Downtown Key Tower - The Greatroom",
+        "info": "venue",
+        "address": "1360 W Mall Dr, Cleveland, OH 44114"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.694058,41.501524
+        ]
+      }
+    }
+  ]
+}

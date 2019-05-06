@@ -1,0 +1,24 @@
+{
+  "name": "cleveland-map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cache": "node node_modules/workbox-cli/build/bin.js generateSW workbox-config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reyemtm/cleveland-map.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reyemtm/cleveland-map/issues"
+  },
+  "homepage": "https://github.com/reyemtm/cleveland-map#readme",
+  "dependencies": {
+    "workbox-cli": "^4.3.1"
+  }
+}

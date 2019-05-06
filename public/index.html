@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cleveland</title>
+    <script>
+      if (
+        window.location.protocol === "http:" &&
+        window.location.origin != "http://127.0.0.1:8080"
+      ) {
+        location.href = location.href.replace("http://", "https://");
+      }
+    </script>
+    <link href="/css/mapbox-gl.css" rel="stylesheet" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#fff" />
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register('/sw.js')
+          .then(function () {
+            console.log("Service Worker registered");
+          });
+      }
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, Avenir, "Avenir Next",
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+      }
+
+      .loading {
+        z-index: 2;
+        background: rgba(255, 255, 255, 0.6);
+        height: 100vh;
+      }
+
+      .loading.loading-lg::after {
+        height: 1.6rem;
+        margin-left: -0.8rem;
+        margin-top: -0.8rem;
+        width: 1.6rem;
+      }
+
+      .loading::after {
+        animation: loading 0.5s infinite linear;
+        border: 0.1rem solid #333;
+        border-radius: 50%;
+        border-right-color: transparent;
+        border-top-color: transparent;
+        content: "";
+        display: block;
+        height: 0.8rem;
+        left: 50%;
+        margin-left: -0.4rem;
+        margin-top: -0.4rem;
+        position: absolute;
+        top: 50%;
+        width: 0.8rem;
+        z-index: 1;
+      }
+
+      @keyframes loading {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .hidden {
+        display: none;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+      }
+
+      .not-visible {
+        visibility: hidden;
+      }
+      .mapboxgl-ctrl,
+      .mapboxgl-ctrl.mapboxgl-ctrl-group {
+        border-radius: 2px;
+        border: solid thin lightgray;
+        box-shadow: none;
+      }
+      .mapboxgl-popup-content {
+        font-size: large;
+        line-height: 1.5rem;
+        font-family: -apple-system, BlinkMacSystemFont, Avenir, "Avenir Next",
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+        font-weight: 500;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div id="loading" class="loading loading-lg"></div>
+    <div id="map" class="not-visible"></div>
+    <script src="/js/mapbox-gl.js"></script>
+    <script>
+      /**
+       * Global map object
+       */
+      var map = new mapboxgl.Map({
+        container: "map",
+        style: "basic.json",
+        hash: true,
+        center: [-81.689292, 41.501192],
+        zoom: 15.6
+      });
+
+      map.addControl(new mapboxgl.NavigationControl());
+
+      map.addControl(
+        new mapboxgl.GeolocateControl({
+          positionOptions: {
+            enableHighAccuracy: true
+          },
+          trackUserLocation: true
+        })
+      );
+
+      map.on("load", function() {
+        addLayers();
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('map').classList.remove('not-visible');
+      });
+
+      map.on("click", function(e) {
+        var features = map.queryRenderedFeatures(e.point);
+        if (features.length && features[0].source === "poisSource") {
+          var popup = new mapboxgl.Popup().setLngLat(e.lngLat);
+          var html = "";
+          var p = features[0].properties;
+          var keys = ["name", "address", "website"]
+          for (let k in keys) {
+            if (p[keys[k]]) {
+              html += p[keys[k]] + "<br>"
+            }
+          }
+          popup.setHTML(html);
+          popup.addTo(map);
+        }
+      });
+
+      function addGeoJSONSource(m, g, base) {
+        let n = g.split(".");
+        let sanitized = n[0].replace(" ", "");
+        let s = n[0] + "Source";
+        console.log("attempting to add source", s);
+        m.addSource(s, {
+          type: "geojson",
+          data: base + g
+        });
+      }
+
+      function addLayers() {
+        addGeoJSONSource(map, "pois.geojson", "");
+
+        map.addLayer({
+          'id': 'pois',
+          'type': 'circle',
+          'source': 'poisSource',
+          'paint': {
+            'circle-color': [
+              "case", 
+                ["==", ["get", "info"], "parking"], "cornflowerblue",
+              "firebrick"
+            ],
+            'circle-radius': 6,
+            'circle-stroke-width': 4,
+            'circle-stroke-opacity': 0.6,
+            'circle-stroke-color': 'white'
+          }
+        });
+
+        map.addLayer({
+          'id': 'poisLabel',
+          'type': 'symbol',
+          'source': 'poisSource',
+          "paint": {
+            "text-color": "black",
+            "text-halo-color": "white",
+            "text-halo-width": 2,
+            "text-halo-blur": 0
+          },
+          "minzoom": 15,
+          "layout": {
+            "visibility": "visible",
+            "text-font": [
+              "Klokantech Noto Sans Regular"
+            ],
+            "text-field": "{name}",
+            "text-anchor": "bottom-left",
+            "text-size": 14,
+            "text-offset": [0.4, 0]
+          }
+        });
+
+      }
+    </script>
+  </body>
+</html>
