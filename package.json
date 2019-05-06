@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "wizard": "node node_modules/workbox-cli/build/bin.js wizard",
     "cache": "node node_modules/workbox-cli/build/bin.js generateSW workbox-config.js"
   },
   "repository": {

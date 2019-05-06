@@ -3,5 +3,5 @@ module.exports = {
   "globPatterns": [
     "**/*.{json,css,pbf,png,html,js,geojson}"
   ],
-  "swDest": "public\\sw.js"
+  "swDest": "./public/sw.js"
 };
