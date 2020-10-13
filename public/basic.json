@@ -12,13 +12,13 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "tiles": ["https://neogeo2019map.netlify.com/tiles/{z}/{x}/{y}.pbf"],
+      "tiles": ["https://neogeo2019map.netlify.app/tiles/{z}/{x}/{y}.pbf"],
       "attribution": "<a href='http://openmaptiles.org/' target='_blank'>© OpenMapTiles</a> | <a href='https://www.getbounds.com'>Malcolm Meyer</a>",
       "maxzoom": 14
     }
   },
-  "sprite": "https://neogeo2019map.netlify.com/sprites/sprite",
-  "glyphs": "https://neogeo2019map.netlify.com/fonts/{fontstack}/{range}.pbf",
+  "sprite": "https://neogeo2019map.netlify.app/sprites/sprite",
+  "glyphs": "https://neogeo2019map.netlify.app/fonts/{fontstack}/{range}.pbf",
   "layers": [{
       "id": "background",
       "paint": {
