@@ -117,12 +117,15 @@
     <div id="map" class="not-visible"></div>
     <script src="/js/mapbox-gl.js"></script>
     <script>
-      // Open the modal
-      netlifyIdentity.open();
+
 
       // Get the current user:
       // Available after on('init') is invoked
       const user = netlifyIdentity.currentUser();
+      if (!user) {
+        // Open the modal
+        netlifyIdentity.open();
+      }
 
       // Bind to events
       netlifyIdentity.on('init', user => console.log('init', user));
